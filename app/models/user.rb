@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :follow
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverses_of_relationship, source: :user
-  has_many :favors
+  has_many :favors, dependent: :destroy
   has_many :favorites, through: :favors, source: :micropost
   
   def unfollow(other_user)
